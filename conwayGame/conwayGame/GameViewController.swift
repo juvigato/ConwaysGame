@@ -40,13 +40,13 @@ class GameViewController: UIViewController {
         scene.rootNode.addChildNode(cameraNode)
         
         // place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 15)
+        cameraNode.position = SCNVector3(x: -3, y: 0, z: 25)
         
         // create and add a light to the scene
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
         lightNode.light!.type = .omni
-        lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
+        lightNode.position = SCNVector3(x: 0, y: 0, z: 10)
         scene.rootNode.addChildNode(lightNode)
         
         // add a tap gesture recognizer
@@ -84,7 +84,8 @@ class GameViewController: UIViewController {
                 SCNTransaction.commit()
             }
             
-            material.emission.contents = UIColor.red
+//            material.emission.contents = UIColor.red
+            material.diffuse.contents = UIColor.red
             
             SCNTransaction.commit()
         }
@@ -105,5 +106,4 @@ class GameViewController: UIViewController {
             return .all
         }
     }
-
 }
