@@ -62,11 +62,11 @@
 			children = (
 				0F6C9A78236B5053006C666A /* AppDelegate.swift */,
 				0F6C9A7A236B5053006C666A /* art.scnassets */,
-				0F6C9A7C236B5053006C666A /* GameViewController.swift */,
 				0F6C9A7E236B5053006C666A /* Main.storyboard */,
 				0F6C9A81236B5055006C666A /* Assets.xcassets */,
 				0F6C9A83236B5055006C666A /* LaunchScreen.storyboard */,
 				0F6C9A86236B5055006C666A /* Info.plist */,
+				0F6C9A7C236B5053006C666A /* GameViewController.swift */,
 				0F6C9A8E236B5F34006C666A /* GameScene.swift */,
 				0F01AFA3236C9C1700AE616C /* BoxCelula.swift */,
 			);

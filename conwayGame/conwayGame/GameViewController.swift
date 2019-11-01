@@ -51,8 +51,6 @@ class GameViewController: UIViewController {
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
-        
-        
     }
     
     @objc
@@ -80,9 +78,17 @@ class GameViewController: UIViewController {
                 
                 SCNTransaction.commit()
             }
+        
+            let node = result.node as! BoxCelula
             
-            material.diffuse.contents = UIColor.red
-            
+            switch node.state {
+            case .alive:
+                material.diffuse.contents = UIColor.white
+                node.state = .dead
+            case .dead:
+                material.diffuse.contents = UIColor.red
+                node.state = .alive
+            }
             SCNTransaction.commit()
         }
     }
