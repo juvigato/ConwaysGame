@@ -10,27 +10,38 @@ import Foundation
 import SceneKit
 
 class GameScene: SCNScene {
+    
+    var gridLeitura = [[BoxCelula]]()
+    var gridAlteracao = [[BoxCelula]]()
+    
     override init() {
         super.init()
         
+        let tamanho: Int = 5
         
+        createMatrix(tamanho: tamanho)
+        
+    }
+    
+    func createMatrix(tamanho:Int) {
         let offset: Int = 8
         
-        for i in 0...10 {
-            for j in 0...16 {
-                let geometry = SCNBox(width: 0.5, height: 0.5, length: 0.08, chamferRadius: 0.005)
-//                geometry.firstMaterial?.diffuse.contents = UIColor.white
-//                geometry.firstMaterial?.emission.contents = UIColor.blue
-                let boxNode = SCNNode(geometry: geometry)
-                let boxCopy = boxNode.copy() as! SCNNode
-                boxCopy.position.x = Float(i-offset)
-                boxCopy.position.y = Float(j-offset)
-                self.rootNode.addChildNode(boxCopy)
+        for x in 0...tamanho-1 {
+            
+            var row = [BoxCelula]()
+            
+            for y in 0...tamanho-1 {
+                let cell = BoxCelula()
+                cell.position.x = Float(x - offset)
+                cell.position.y = Float(y - offset)
+                row.append(cell)
+                self.rootNode.addChildNode(cell)
             }
-        }
+        }   
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 }
+
