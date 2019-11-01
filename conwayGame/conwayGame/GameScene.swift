@@ -27,9 +27,7 @@ class GameScene: SCNScene {
         let offset: Int = 8
         
         for x in 0...tamanho-1 {
-            
             var row = [BoxCelula]()
-            
             for y in 0...tamanho-1 {
                 let cell = BoxCelula()
                 cell.position.x = Float(x - offset)
@@ -37,6 +35,7 @@ class GameScene: SCNScene {
                 row.append(cell)
                 self.rootNode.addChildNode(cell)
             }
+            gridLeitura.append(row)
         }   
     }
     
