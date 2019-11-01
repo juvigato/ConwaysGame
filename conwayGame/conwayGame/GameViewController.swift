@@ -10,7 +10,7 @@ import UIKit
 import QuartzCore
 import SceneKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, SCNSceneRendererDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class GameViewController: UIViewController {
         scene.rootNode.addChildNode(cameraNode)
         
         // place the camera
-        cameraNode.position = SCNVector3(x: -3, y: 0, z: 25)
+        cameraNode.position = SCNVector3(x: -5, y: -5, z: 25)
         
         // create and add a light to the scene
         let lightNode = SCNNode()
@@ -52,6 +52,10 @@ class GameViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
     }
+    
+//    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+//        
+//    }
     
     @objc
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
