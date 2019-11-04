@@ -12,11 +12,11 @@ import SceneKit
 
 class GameViewController: UIViewController, SCNSceneRendererDelegate {
 
+    // create a new scene
+    let scene = GameScene()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // create a new scene
-        let scene = GameScene()
         
         // retrieve the SCNView
         let scnView = self.view as! SCNView
@@ -53,9 +53,11 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         scnView.addGestureRecognizer(tapGesture)
     }
     
-//    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-//        
-//    }
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        //chamo a updateGrid
+        
+        
+    }
     
     @objc
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
@@ -84,7 +86,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
             }
         
             let node = result.node as! BoxCelula
-            
+
             switch node.state {
             case .alive:
                 material.diffuse.contents = UIColor.white
@@ -94,6 +96,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
                 node.state = .alive
             }
             SCNTransaction.commit()
+//            renderer(<#T##renderer: SCNSceneRenderer##SCNSceneRenderer#>, updateAtTime: <#T##TimeInterval#>)
         }
     }
     
