@@ -21,7 +21,6 @@ class Rules: SCNScene {
         self.finalValue = finalValue
         self.minValue = minValue
         self.maxValue = maxValue
-//        checkCases()
         super.init()
     }
     

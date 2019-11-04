@@ -14,13 +14,15 @@ class GameScene: SCNScene {
     var gridLeitura = [[BoxCelula]]()
     var gridAlteracao = [[BoxCelula]]()
     let tamanho: Int = 5
+    var rules = [Rules]()
     
     override init() {
         super.init()
-
+        addRule()
         createMatrix(tamanho: tamanho)
     }
     
+    //Criando matriz
     func createMatrix(tamanho:Int) {
         let offset: Int = 8
         
@@ -37,18 +39,24 @@ class GameScene: SCNScene {
         }   
     }
     
+    //Atualizando a grid
     func updateGrid() {
-        
         for i in 0..<tamanho {
-            
+            var row = [BoxCelula]()
             for j in 0..<tamanho {
+                let cell = gridLeitura[i][j]
+                countNeighbour(celula: cell)
+                //applyRules (checkCases)
                 
+                row.append(cell)
             }
+            gridAlteracao.append(row)
         }
+        gridLeitura = gridAlteracao
     }
     
-    func countNeighbour() {
-        let celula = BoxCelula()
+    //Contando quantos vizinhos um node possui
+    func countNeighbour(celula: BoxCelula) {
         var count: Int = 0
         var i: Float = celula.position.x - 1
         
@@ -59,6 +67,7 @@ class GameScene: SCNScene {
                 if celula.position.x != i || celula.position.y != j
                     && i > 0 && j > 0 && Int(i) < tamanho && Int(j) < tamanho {
                     count = count + 1
+                    celula.neighbours = count
                 }
                 j = j + 1
             }
@@ -66,11 +75,12 @@ class GameScene: SCNScene {
         }
     }
     
+    //Adicionando regras
     func addRule() {
-        Rules.init(inicialValue: .alive, finalValue: .dead, minValue: 0, maxValue: 1)
-        Rules.init(inicialValue: .alive, finalValue: .dead, minValue: 4, maxValue: 8)
-        Rules.init(inicialValue: .alive, finalValue: .alive, minValue: 2, maxValue: 3)
-        Rules.init(inicialValue: .dead, finalValue: .alive, minValue: 3, maxValue: 3)
+        rules.append(Rules(inicialValue: .alive, finalValue: .dead, minValue: 0, maxValue: 1))
+        rules.append(Rules(inicialValue: .alive, finalValue: .dead, minValue: 4, maxValue: 8))
+        rules.append(Rules(inicialValue: .alive, finalValue: .alive, minValue: 2, maxValue: 3))
+        rules.append(Rules(inicialValue: .dead, finalValue: .alive, minValue: 3, maxValue: 3))
     }
     
     required init?(coder aDecoder: NSCoder) {

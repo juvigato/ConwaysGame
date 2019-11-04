@@ -12,6 +12,7 @@ import SceneKit
 class BoxCelula: SCNNode {
     
     var state:State = .dead
+    var neighbours: Int = 0
     
     override init() {
         super.init()
