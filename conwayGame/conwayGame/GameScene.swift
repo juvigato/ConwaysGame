@@ -66,6 +66,7 @@ class GameScene: SCNScene {
         addGrid()
     }
     
+    // remover grid da tela
     func removerGrid() {
         for x in self.gridLeitura {
             for y in x {
@@ -74,12 +75,18 @@ class GameScene: SCNScene {
         }
     }
     
+    // adicionando grid na tela
     func addGrid() {
         for x in 0..<gridLeitura.count {
             for y in 0..<gridLeitura[x].count {
                 self.rootNode.addChildNode(gridLeitura[x][y])
             }
         }
+    }
+    
+    func resetGrid() {
+        removerGrid()
+        createMatrix(tamanho: 8)
     }
     
     //Contando quantos vizinhos um node possui
@@ -105,14 +112,6 @@ class GameScene: SCNScene {
         celula.neighbours = count
         return count
     }
-    
-    //Adicionando regras
-//    func addRule() {
-//        rules.append(Rules(inicialValue: .alive, finalValue: .dead, minValue: 0, maxValue: 1))
-//        rules.append(Rules(inicialValue: .alive, finalValue: .dead, minValue: 4, maxValue: 8))
-//        rules.append(Rules(inicialValue: .alive, finalValue: .alive, minValue: 2, maxValue: 3))
-//        rules.append(Rules(inicialValue: .dead, finalValue: .alive, minValue: 3, maxValue: 3))
-//    }
     
     func teste(){
         for i in 0..<tamanho {

@@ -35,7 +35,7 @@ class BoxCelula: SCNNode {
         self.color = .systemGray
         super.init()
         self.position = SCNVector3(x, y, 0)
-        let geometryBox = SCNBox(width: 0.8, height: 0.8, length: 0.08, chamferRadius: 0.005)
+        let geometryBox = SCNBox(width: 0.8, height: 0.8, length: 0.1, chamferRadius: 0.005)
         self.geometry = geometryBox
         geometryBox.firstMaterial?.diffuse.contents = color
     }

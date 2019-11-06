@@ -15,14 +15,10 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     // create a new scene
     let scene = GameScene()
     
-//    var grid = [[BoxCelula]]()
-    
     @IBOutlet weak var scnView: SCNView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        grid = scene.gridLeitura
         
         // set the scene to the view
         scnView.scene = scene
@@ -44,7 +40,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         scene.rootNode.addChildNode(cameraNode)
         
         // place the camera
-        cameraNode.position = SCNVector3(x: 3, y: 0, z: 25)
+        cameraNode.position = SCNVector3(x: 3.5, y: 3, z: 20)
         
         // create and add a light to the scene
         let lightNode = SCNNode()
@@ -53,6 +49,12 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         lightNode.position = SCNVector3(x: 0, y: 0, z: 10)
         scene.rootNode.addChildNode(lightNode)
         
+        let ambientnode = SCNNode()
+        ambientnode.light = SCNLight()
+        ambientnode.light!.type = .ambient
+        ambientnode.light?.color = UIColor.white
+        scene.rootNode.addChildNode(ambientnode)
+        
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
@@ -60,10 +62,14 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
        
     //fazer botao por codigo
     @IBAction func startButton(_ sender: Any) {
-        scene.teste()
+//        scene.teste()
         scene.updateGrid()
     }
     
+    @IBAction func resetButton(_ sender: Any) {
+        scene.resetGrid()
+    }
+
     @objc
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
         
