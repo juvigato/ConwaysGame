@@ -25,12 +25,12 @@ class Rules: SCNScene {
     }
     
     //funcao de checar os casos
-    func checkCases() {
-        if inicialValue == inicialValue && finalValue == finalValue {
-            
-            
-        }
-    }
+//    func checkCases(states: State, count: Int) -> State{
+//        if inicialValue == inicialValue && minValue == minValue && maxValue == maxValue {
+//            
+//            
+//        }
+//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
