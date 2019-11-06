@@ -12,12 +12,20 @@ import SceneKit
 class GameScene: SCNScene {
     
     var gridLeitura = [[BoxCelula]]()
+    var gridGeracao = [BoxCelula]()
+    
+//    var geracao: Int
     
     let tamanho: Int = 8
     
     override init() {
+//        geracao = 0
         super.init()
         createMatrix(tamanho: tamanho)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     //Criando matriz
@@ -59,6 +67,7 @@ class GameScene: SCNScene {
                     }
                 }
                 gridAlteracao[i].append(newCell)
+//                geracao = geracao + 1
             }
         }
         removerGrid()
@@ -125,9 +134,5 @@ class GameScene: SCNScene {
             print(" ")
         }
         print(" ")
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
     }
 }
