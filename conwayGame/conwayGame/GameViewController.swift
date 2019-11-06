@@ -10,19 +10,20 @@ import UIKit
 import QuartzCore
 import SceneKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, SCNSceneRendererDelegate {
+    
+    // create a new scene
+    let scene = GameScene()
+    
+    @IBOutlet weak var scnView: SCNView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // create a new scene
-        let scene = GameScene()
-        
-        // retrieve the SCNView
-        let scnView = self.view as! SCNView
-        
         // set the scene to the view
         scnView.scene = scene
+        scnView.loops = true
+        scnView.isPlaying = true
         
         // allows the user to manipulate the camera
         scnView.allowsCameraControl = true
@@ -32,15 +33,14 @@ class GameViewController: UIViewController {
         
         // configure the view
         scnView.backgroundColor = UIColor.black
-    
-        
+           
         // create and add a camera to the scene
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         scene.rootNode.addChildNode(cameraNode)
         
         // place the camera
-        cameraNode.position = SCNVector3(x: -3, y: 0, z: 25)
+        cameraNode.position = SCNVector3(x: 3.5, y: 3, z: 20)
         
         // create and add a light to the scene
         let lightNode = SCNNode()
@@ -49,44 +49,61 @@ class GameViewController: UIViewController {
         lightNode.position = SCNVector3(x: 0, y: 0, z: 10)
         scene.rootNode.addChildNode(lightNode)
         
+        let ambientnode = SCNNode()
+        ambientnode.light = SCNLight()
+        ambientnode.light!.type = .ambient
+        ambientnode.light?.color = UIColor.white
+        scene.rootNode.addChildNode(ambientnode)
+        
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
     }
+       
+    //fazer botao por codigo
+    @IBAction func startButton(_ sender: Any) {
+//        scene.teste()
+        scene.updateGrid()
+    }
     
+    @IBAction func resetButton(_ sender: Any) {
+        scene.resetGrid()
+    }
+
     @objc
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
-        // retrieve the SCNView
-        let scnView = self.view as! SCNView
         
-        // check what nodes are tapped
         let p = gestureRecognize.location(in: scnView)
         let hitResults = scnView.hitTest(p, options: [:])
-        // check that we clicked on at least one object
+        
         if hitResults.count > 0 {
-            // retrieved the first clicked object
+            
             let result = hitResults[0]
             
-            // get its material
             let material = result.node.geometry!.firstMaterial!
             
-            // highlight it
             SCNTransaction.begin()
             SCNTransaction.animationDuration = 0.5
             
-            // on completion - unhighlight
             SCNTransaction.completionBlock = {
                 SCNTransaction.begin()
                 SCNTransaction.animationDuration = 0.5
-                
-                material.emission.contents = UIColor.black
-                
+
                 SCNTransaction.commit()
             }
             
-//            material.emission.contents = UIColor.red
-            material.diffuse.contents = UIColor.red
             
+            if let node = result.node as? BoxCelula {
+                
+                switch node.state {
+                case .alive:
+                    material.diffuse.contents = node.color
+                    node.state = .dead
+                case .dead:
+                    material.diffuse.contents = node.color
+                    node.state = .alive
+                }
+            }
             SCNTransaction.commit()
         }
     }

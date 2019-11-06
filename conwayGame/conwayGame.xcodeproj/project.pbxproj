@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F01AFA4236C9C1700AE616C /* BoxCelula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F01AFA3236C9C1700AE616C /* BoxCelula.swift */; };
 		0F6C9A79236B5053006C666A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C9A78236B5053006C666A /* AppDelegate.swift */; };
 		0F6C9A7B236B5053006C666A /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F6C9A7A236B5053006C666A /* art.scnassets */; };
 		0F6C9A7D236B5053006C666A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C9A7C236B5053006C666A /* GameViewController.swift */; };
@@ -14,9 +15,11 @@
 		0F6C9A82236B5055006C666A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F6C9A81236B5055006C666A /* Assets.xcassets */; };
 		0F6C9A85236B5055006C666A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F6C9A83236B5055006C666A /* LaunchScreen.storyboard */; };
 		0F6C9A8F236B5F34006C666A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6C9A8E236B5F34006C666A /* GameScene.swift */; };
+		0F9BAD1423708F4600D4441E /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9BAD1323708F4600D4441E /* Rules.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F01AFA3236C9C1700AE616C /* BoxCelula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxCelula.swift; sourceTree = "<group>"; };
 		0F6C9A75236B5053006C666A /* conwayGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = conwayGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F6C9A78236B5053006C666A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F6C9A7A236B5053006C666A /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -26,6 +29,7 @@
 		0F6C9A84236B5055006C666A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F6C9A86236B5055006C666A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F6C9A8E236B5F34006C666A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		0F9BAD1323708F4600D4441E /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +64,14 @@
 			children = (
 				0F6C9A78236B5053006C666A /* AppDelegate.swift */,
 				0F6C9A7A236B5053006C666A /* art.scnassets */,
-				0F6C9A7C236B5053006C666A /* GameViewController.swift */,
 				0F6C9A7E236B5053006C666A /* Main.storyboard */,
 				0F6C9A81236B5055006C666A /* Assets.xcassets */,
 				0F6C9A83236B5055006C666A /* LaunchScreen.storyboard */,
 				0F6C9A86236B5055006C666A /* Info.plist */,
+				0F6C9A7C236B5053006C666A /* GameViewController.swift */,
 				0F6C9A8E236B5F34006C666A /* GameScene.swift */,
+				0F01AFA3236C9C1700AE616C /* BoxCelula.swift */,
+				0F9BAD1323708F4600D4441E /* Rules.swift */,
 			);
 			path = conwayGame;
 			sourceTree = "<group>";
@@ -143,8 +149,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F6C9A8F236B5F34006C666A /* GameScene.swift in Sources */,
+				0F01AFA4236C9C1700AE616C /* BoxCelula.swift in Sources */,
 				0F6C9A7D236B5053006C666A /* GameViewController.swift in Sources */,
 				0F6C9A79236B5053006C666A /* AppDelegate.swift in Sources */,
+				0F9BAD1423708F4600D4441E /* Rules.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
