@@ -76,6 +76,8 @@ class GameScene: SCNScene {
                 if grid[i][j].state == .alive {
                     if count <= 1 || count >= 4 {
                         gridAlteracao[i][j].state = .dead
+                    } else {
+                        gridAlteracao[i][j].state = .alive
                     }
                 } else if grid[i][j].state == .dead {
                     if count == 3 {

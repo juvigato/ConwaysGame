@@ -15,22 +15,18 @@ class BoxCelula: SCNNode {
     var posicao: (Int, Int, Int)
     var geracao: Int
 
-    var state:State {
+    var state: State {
         willSet{
             if newValue == .dead {
                 //muda a cor para morto
                 color = UIColor.systemGray
-            } else if newValue == .alive{
+            } else if newValue == .alive {
                 //mudar cor para vivo
-                color = UIColor.systemPink
-//                if color == UIColor.systemRed{
-//                    color = UIColor.systemPink
-//                } else {
-//                    color = UIColor.systemRed
-//                }
-                
-            } else {
-                color = UIColor.systemBlue
+                if posicao.2 % 2 == 0 {
+                    color = UIColor.systemPink
+                } else{
+                    color = UIColor.systemBlue
+                }
             }
             geometry?.firstMaterial?.diffuse.contents = color
         }
