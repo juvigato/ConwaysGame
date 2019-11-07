@@ -28,15 +28,6 @@
                                     <action selector="startButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="4cI-bG-PYs"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TVC-no-Dlb">
-                                <rect key="frame" x="184" y="130" width="50" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Reset"/>
-                                <connections>
-                                    <action selector="resetButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="P6O-KV-bcR"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>

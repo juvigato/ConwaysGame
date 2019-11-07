@@ -14,7 +14,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     
     // create a new scene
     let scene = GameScene()
-    var zGeracao: Int = 0
+    var zGeracao: Int = 1
     
     @IBOutlet weak var scnView: SCNView!
 
@@ -63,14 +63,13 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
        
     //fazer botao por codigo
     @IBAction func startButton(_ sender: Any) {
-//        scene.teste()
-        scene.gerarCamadaZ() //colocar parametro z
+        scene.gerarCamadaZ(zGeracao: zGeracao) //colocar parametro z
         zGeracao += 1
     }
     
-    @IBAction func resetButton(_ sender: Any) {
-        scene.resetGrid()
-    }
+//    @IBAction func resetButton(_ sender: Any) {
+//        scene.resetGrid()
+//    }
 
     @objc
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {

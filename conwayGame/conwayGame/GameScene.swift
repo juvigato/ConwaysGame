@@ -14,10 +14,8 @@ class GameScene: SCNScene {
     var gridLeitura = [[BoxCelula]]()
     var gridGeracao: [[[BoxCelula]]] = []
     let tamanho: Int = 8
-    var zGeracao: Int
     
     override init() {
-        zGeracao = 1
         super.init()
         createMatrix(tamanho: tamanho)
     }
@@ -42,13 +40,12 @@ class GameScene: SCNScene {
         }   
     }
     
-    func createMatrixGeracao(tamanho:Int, celula: [[BoxCelula]], z: Int) {
+    func createMatrixGeracao(tamanho:Int, celula: [[BoxCelula]], zGeracao: Int) {
         let z = zGeracao
         for x in 0...tamanho-1 {
             for y in 0...tamanho-1 {
                 let cell = celula[x][y]
-//                cell.position.x =
-                cell.position = SCNVector3(x: Float(x),y: Float(y),z: Float(Double(z)) * (0.8 + 0.3))
+                cell.position = SCNVector3(x: Float(x),y: Float(y),z: Float(Double(z)) * (0.8 + 0.1))
                 
                 if cell.state == .alive {
                     self.rootNode.addChildNode(cell)
@@ -57,9 +54,9 @@ class GameScene: SCNScene {
         }
     }
     
-    func gerarCamadaZ() {
+    func gerarCamadaZ(zGeracao: Int) {
         let cellZ = updateGrid(grid: gridLeitura, z: zGeracao)
-        createMatrixGeracao(tamanho: tamanho, celula: cellZ, z: zGeracao)
+        createMatrixGeracao(tamanho: tamanho, celula: cellZ, zGeracao: zGeracao)
         
     }
     
@@ -67,14 +64,12 @@ class GameScene: SCNScene {
     func updateGrid(grid: [[BoxCelula]], z: Int) -> [[BoxCelula]] {
         
         var gridAlteracao = [[BoxCelula]]()
-//        var cell: BoxCelula
         var count: Int
         
         for i in 0..<tamanho {
             gridAlteracao.append([])
             for j in 0..<tamanho {
                 gridAlteracao[i].append(grid[i][j].copy(cell: grid[i][j], z: z))
-//                let newCell = cell.copy(cell: cell)
                 count = countNeighbour(celula: grid[i][j])
                 
                 //regras
@@ -90,9 +85,7 @@ class GameScene: SCNScene {
                 
             }
         }
-//        removerGrid()
         gridLeitura = gridAlteracao
-//        addGrid()
         return gridLeitura
     }
     
