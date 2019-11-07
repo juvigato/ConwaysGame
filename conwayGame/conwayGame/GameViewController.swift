@@ -66,9 +66,9 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         scene.updateGrid()
     }
     
-    @IBAction func resetButton(_ sender: Any) {
-        scene.resetGrid()
-    }
+//    @IBAction func resetButton(_ sender: Any) {
+//        scene.resetGrid()
+//    }
 
     @objc
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
