@@ -12,14 +12,12 @@ import SceneKit
 class GameScene: SCNScene {
     
     var gridLeitura = [[BoxCelula]]()
-    var gridGeracao = [BoxCelula]()
-    
-//    var geracao: Int
-    
+    var gridGeracao: [[[BoxCelula]]] = []
     let tamanho: Int = 8
+    var zGeracao: Int
     
     override init() {
-//        geracao = 0
+        zGeracao = 1
         super.init()
         createMatrix(tamanho: tamanho)
     }
@@ -30,49 +28,72 @@ class GameScene: SCNScene {
     
     //Criando matriz
     func createMatrix(tamanho:Int) {
+        gridGeracao.append([[BoxCelula]]())
         
         for x in 0...tamanho-1 {
             var row = [BoxCelula]()
             for y in 0...tamanho-1 {
-                let cell = BoxCelula(x: x, y: y)
+                let cell = BoxCelula(x: x, y: y, z: 0)
                 row.append(cell)
                 self.rootNode.addChildNode(cell)
             }
             gridLeitura.append(row)
+            gridGeracao.append(gridLeitura)
         }   
     }
     
+    func createMatrixGeracao(tamanho:Int, celula: [[BoxCelula]], z: Int) {
+        let z = zGeracao
+        for x in 0...tamanho-1 {
+            for y in 0...tamanho-1 {
+                let cell = celula[x][y]
+//                cell.position.x =
+                cell.position = SCNVector3(x: Float(x),y: Float(y),z: Float(Double(z)) * (0.8 + 0.3))
+                
+                if cell.state == .alive {
+                    self.rootNode.addChildNode(cell)
+                }
+            }
+        }
+    }
+    
+    func gerarCamadaZ() {
+        let cellZ = updateGrid(grid: gridLeitura, z: zGeracao)
+        createMatrixGeracao(tamanho: tamanho, celula: cellZ, z: zGeracao)
+        
+    }
+    
     //Atualizando a grid
-    func updateGrid() {
+    func updateGrid(grid: [[BoxCelula]], z: Int) -> [[BoxCelula]] {
         
         var gridAlteracao = [[BoxCelula]]()
-        var cell: BoxCelula
+//        var cell: BoxCelula
         var count: Int
         
         for i in 0..<tamanho {
-            gridAlteracao.append([BoxCelula]())
+            gridAlteracao.append([])
             for j in 0..<tamanho {
-                cell = gridLeitura[i][j]
-                count = countNeighbour(celula: cell)
-                let newCell = cell.copy(cell: cell)
+                gridAlteracao[i].append(grid[i][j].copy(cell: grid[i][j], z: z))
+//                let newCell = cell.copy(cell: cell)
+                count = countNeighbour(celula: grid[i][j])
                 
                 //regras
-                if newCell.state == .alive {
+                if grid[i][j].state == .alive {
                     if count <= 1 || count >= 4 {
-                        newCell.state = .dead
+                        gridAlteracao[i][j].state = .dead
                     }
-                } else {
+                } else if grid[i][j].state == .dead {
                     if count == 3 {
-                        newCell.state = .alive
+                        gridAlteracao[i][j].state = .alive
                     }
                 }
-                gridAlteracao[i].append(newCell)
-//                geracao = geracao + 1
+                
             }
         }
-        removerGrid()
+//        removerGrid()
         gridLeitura = gridAlteracao
-        addGrid()
+//        addGrid()
+        return gridLeitura
     }
     
     // remover grid da tela

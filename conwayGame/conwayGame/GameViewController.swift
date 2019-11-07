@@ -14,6 +14,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     
     // create a new scene
     let scene = GameScene()
+    var zGeracao: Int = 0
     
     @IBOutlet weak var scnView: SCNView!
 
@@ -63,7 +64,8 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     //fazer botao por codigo
     @IBAction func startButton(_ sender: Any) {
 //        scene.teste()
-        scene.updateGrid()
+        scene.gerarCamadaZ() //colocar parametro z
+        zGeracao += 1
     }
     
     @IBAction func resetButton(_ sender: Any) {
@@ -102,6 +104,8 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
                 case .dead:
                     material.diffuse.contents = node.color
                     node.state = .alive
+                case .dontExist:
+                    node.state = .dontExist
                 }
             }
             SCNTransaction.commit()

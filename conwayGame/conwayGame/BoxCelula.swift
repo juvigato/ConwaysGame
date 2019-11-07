@@ -12,16 +12,19 @@ import SceneKit
 class BoxCelula: SCNNode {
     
     var color : UIColor
-    var posicao: (Int, Int)
+    var posicao: (Int, Int, Int)
+    var geracao: Int
 
     var state:State {
         willSet{
             if newValue == .dead {
                 //muda a cor para morto
                 color = UIColor.systemGray
-            } else {
+            } else if newValue == . alive{
                 //mudar cor para vivo
                 color = UIColor.systemPink
+            } else {
+                color = UIColor.systemBlue
             }
             geometry?.firstMaterial?.diffuse.contents = color
         }
@@ -29,8 +32,9 @@ class BoxCelula: SCNNode {
     
     var neighbours: Int = 0
     
-    init(x: Int, y: Int) {
-        posicao = (x,y)
+    init(x: Int, y: Int, z:Int) {
+        self.geracao = z
+        posicao = (x,y,geracao)
         self.state = .dead
         self.color = .systemGray
         super.init()
@@ -40,9 +44,10 @@ class BoxCelula: SCNNode {
         geometryBox.firstMaterial?.diffuse.contents = color
     }
     
-    func copy(cell: BoxCelula) -> BoxCelula {
-        let newCell = BoxCelula(x: posicao.0, y: posicao.1)
+    func copy(cell: BoxCelula, z: Int) -> BoxCelula {
+        let newCell = BoxCelula(x: posicao.0, y: posicao.1, z: z * Int((0.8 + 0.3)))
         newCell.state = cell.state
+        newCell.geracao = cell.geracao
         newCell.geometry?.firstMaterial?.diffuse.contents = cell.color
         newCell.neighbours = cell.neighbours
         return newCell
@@ -56,4 +61,5 @@ class BoxCelula: SCNNode {
 enum State {
     case alive
     case dead
+    case dontExist
 }
