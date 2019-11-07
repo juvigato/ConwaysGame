@@ -14,7 +14,13 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     
     // create a new scene
     let scene = GameScene()
+    
+    //create a camera
+    let cameraNode = SCNNode()
+    
     var zGeracao: Int = 1
+    
+    var didTouch: Bool = false
     
     @IBOutlet weak var scnView: SCNView!
 
@@ -26,6 +32,8 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         scnView.loops = true
         scnView.isPlaying = true
         
+        scnView.delegate = self
+        
         // allows the user to manipulate the camera
         scnView.allowsCameraControl = true
         
@@ -35,8 +43,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         // configure the view
         scnView.backgroundColor = UIColor.black
            
-        // create and add a camera to the scene
-        let cameraNode = SCNNode()
+        //add a camera to the scene
         cameraNode.camera = SCNCamera()
         scene.rootNode.addChildNode(cameraNode)
         
@@ -65,11 +72,20 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
     @IBAction func startButton(_ sender: Any) {
         scene.gerarCamadaZ(zGeracao: zGeracao) //colocar parametro z
         zGeracao += 1
+        didTouch = true
     }
     
 //    @IBAction func resetButton(_ sender: Any) {
 //        scene.resetGrid()
 //    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        if didTouch {
+            let move = SCNAction.move(to: SCNVector3(x: 3.5, y: 3, z: Float(20 + zGeracao)), duration: 0.5)
+            cameraNode.runAction(move)
+            didTouch = false
+        }
+    }
 
     @objc
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
