@@ -30,7 +30,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate {
         scnView.allowsCameraControl = true
         
         // show statistics such as fps and timing information
-        scnView.showsStatistics = true
+//        scnView.showsStatistics = true
         
         // configure the view
         scnView.backgroundColor = UIColor.black
